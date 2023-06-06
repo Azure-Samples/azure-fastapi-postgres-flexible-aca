@@ -1,15 +1,16 @@
 name: Run Playwright tests
 on: 
-  push:
-    branches:
-      - main
-  pull_request: 
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
-      - 'lab/**'
-      - 'assets/**'
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  # pull_request: 
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - '**.md'
+  #     - 'lab/**'
+  #     - 'assets/**'
 
 
 
