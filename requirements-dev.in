@@ -2,5 +2,4 @@
 playwright
 pytest
 pytest-cov
-pytest-django
 pip-tools
