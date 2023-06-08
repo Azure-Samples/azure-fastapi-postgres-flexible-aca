@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 import models
 
@@ -17,9 +17,9 @@ def on_startup():
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# @app.get("/about")
-# def about(request):
-#     return render(request, "about.html")
+@app.get("/about", response_class=HTMLResponse)
+def about(request: Request):
+    return templates.TemplateResponse("about.html", {"request": request})
 
 # @app.get("/destinations")
 # def destinations(destination=Destination):
