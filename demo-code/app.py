@@ -39,10 +39,10 @@ def about(request: Request):
 #     model = models.Cruise
 #     context_object_name = "cruise"
 
-# @app.get("/info_request")
-# class InfoRequestCreate(SuccessMessageMixin, generic.CreateView):
-#     template_name = "info_request_create.html"
-#     model = models.InfoRequest
-#     fields = ["name", "email", "cruise", "notes"]
-#     success_url = reverse_lazy("index")
-#     success_message = "Thank you, %(name)s! We will email you when we have more information about %(cruise)s!"
+@app.get("/info_request", response_class=HTMLResponse)
+class InfoRequestCreate():
+    template_name = "info_request_create.html"
+    model = models.InfoRequest
+    fields = ["name", "email", "cruise", "notes"]
+    success_url = reverse_lazy("index")
+    success_message = "Thank you, %(name)s! We will email you when we have more information about %(cruise)s!"
