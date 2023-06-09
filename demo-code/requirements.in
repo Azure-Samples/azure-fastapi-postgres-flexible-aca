@@ -4,4 +4,5 @@ sqlmodel
 # opencensus-ext-azure 
 # opencensus-ext-django
 jinja2
-uvicorn
+uvicorn[standard]
+python-multipart
