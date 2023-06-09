@@ -1,6 +1,6 @@
-# Deploy a Django Application via Azure Container Apps
+# Deploy a FastAPI Application via Azure Container Apps
 
-This project will walkthrough the steps to deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The Django application is a simple web application for a space travel agency. The application is built using the Django web framework and uses a PostgreSQL database. The application can be deployed to Azure using  [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). With the command `azd up`.
+This project will walkthrough the steps to deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The FastAPI application is a simple web application for a space travel agency. The application is built using FastAPI framework and uses a PostgreSQL database with SQLModel as an ORM. The application can be deployed to Azure using  [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). With the command `azd up`.
 
 ![Visualization of Application](assets/bicep-visualization.png)
 
@@ -17,7 +17,7 @@ You can deploy your application from your cloned repo using Azure Developer CLI.
 1. Open a terminal, create a new empty folder, and change into it.
 2. Initialize your project using the following command:
 
-`azd init --template azure-django-postgres-aca`
+[REPLACE] - `azd init --template azure-django-postgres-aca`
 
 This command will clone the code to your current folder and prompt you for the following information:
 
