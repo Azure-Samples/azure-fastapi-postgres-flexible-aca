@@ -15,7 +15,6 @@ engine = create_engine(sqlite_url, echo=True, connect_args=connect_args)
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-# Create your models here.
 class CruiseDestinationLink(SQLModel, table=True):
     destination_id: typing.Optional[int] = Field(
         default=None,
@@ -33,17 +32,25 @@ class Destination(SQLModel, table=True):
     id: typing.Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(index=True)
     description: typing.Optional[str]
+    cruises: typing.List["Cruise"] = Relationship(
+        back_populates="destinations",
+        link_model=CruiseDestinationLink,
+    )
 
+    def __str__(self):
+        return f"{self.name}"
 
 class Cruise(SQLModel, table=True):
     id: typing.Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(index=True)
     description: typing.Optional[str]
     destinations: typing.List["Destination"] = Relationship(
-        back_populates="destinations",
+        back_populates="cruises",
         link_model=CruiseDestinationLink,
     )
 
+    def __str__(self):
+        return f"{self.name}"
 
 class InfoRequest(SQLModel, table=True):
     id: typing.Optional[int] = Field(default=None, primary_key=True)
