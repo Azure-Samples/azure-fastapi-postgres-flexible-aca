@@ -1,7 +1,6 @@
-{% load static %}
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'res/css/theme.css' %}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='res/css/theme.css') }}" />
     <title>
         {% block title %}
         ReleCloud - Expand your horizons
@@ -10,8 +9,8 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-translucent-secondary">
-        <img src="{% static 'res/img/small-logo.png' %}" width="60" height="auto" alt="Rocket ship logo" />
-        <a class="navbar-brand tk-elevon" href="#">&nbsp; ReleCloud Space Tourism</a>
+        <img src="{{ url_for('static', path='res/img/small-logo.png') }}" width="60" height="auto" alt="Rocket ship logo" />
+        <a class="navbar-brand tk-elevon" href="/">&nbsp; ReleCloud Space Tourism</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
             aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,27 +19,28 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'info_request' %}">Request Information</a>
+                    <a class="nav-link" href="{{url_for('info_request') }}">Request Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'destinations' %}">Destinations</a>
+                    <a class="nav-link" href="{{ url_for('destinations') }}">Destinations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                
+                    <a class="nav-link" href="{{ url_for('about')}}">About</a>
                 </li>
-                {% comment %} <li class="nav-item">
+                {# <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
-                </li> {% endcomment %}
+                </li> #}
             </ul>
         </div>
     </nav>
 
     <main role="main">
-        <div class="jumbotron main-header" style="background-image: url({% static 'res/img/cosmos-db.jpeg' %}); background-size: cover;">
+        <div class="jumbotron main-header" style="background-image: url({{ url_for('static', path='res/img/cosmos-db.jpeg') }}); background-size: cover;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{% static 'res/img/bit_cosmos.png' %}" class="img img-fluid" alt="Cartoon raccoon floating in space" />
+                        <img src="{{ url_for('static', path='res/img/bit_cosmos.png') }}" class="img img-fluid" alt="Cartoon raccoon floating in space" />
                     </div>
                     <div class="col-md-8 ml-md-auto align-self-center">
                         <h1 class="display-1">Expand your horizons</h1>
@@ -60,7 +60,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="mr-3 img-fluid" src="{% static 'res/img/astronaut.jpeg' %}" alt="Astronaut looking into space" />
+                    <img class="mr-3 img-fluid" src="{{ url_for('static', path='res/img/astronaut.jpeg') }}" alt="Astronaut looking into space" />
                 </div>
                 <div class="col-md-8">
                     {% block content %}
@@ -73,7 +73,7 @@
     </main>
 
     <footer class="container">
-        <p>&copy; Microsoft 2021</p>
+        <p>&copy; Microsoft 2023</p>
     </footer>
 </body>
 

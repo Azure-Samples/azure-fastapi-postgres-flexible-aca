@@ -1,6 +1,6 @@
 # Deploy a Django Application via Azure Container Apps
 
-This project will walkthrough the steps to deploy a Django application to Azure Container Apps. The Django application is a simple web application for a space travel agency. The application is built using the Django web framework and uses a PostgreSQL database. The application can be deployed to Azure using  [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). With the command `azd up`.
+This project will walkthrough the steps to deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The Django application is a simple web application for a space travel agency. The application is built using the Django web framework and uses a PostgreSQL database. The application can be deployed to Azure using  [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). With the command `azd up`.
 
 ![Visualization of Application](assets/bicep-visualization.png)
 
