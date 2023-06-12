@@ -6,6 +6,7 @@ services:
 
     environment:
       POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       # Password removed
       POSTGRES_DB: relecloud
       POSTGRES_HOST: db

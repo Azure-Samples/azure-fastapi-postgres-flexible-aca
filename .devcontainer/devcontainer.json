@@ -17,7 +17,7 @@
     "workspaceFolder": "/workspace",
 	"forwardPorts": [8000, 5432],
     "portsAttributes": {
-		"8000": {"label": "Django port", "onAutoForward": "notify"},
+		"8000": {"label": "FastAPI port", "onAutoForward": "notify"},
 		"5432": {"label": "PostgreSQL port", "onAutoForward": "silent"}
 	},
     "customizations": {
@@ -33,8 +33,8 @@
 			]
         }
     },
-	"postCreateCommand": "python demo-code/manage.py migrate && python demo-code/manage.py loaddata demo-code/seed_data.json",
+	// "postCreateCommand": "cd demo_code",
 	"features": {
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	}
 }

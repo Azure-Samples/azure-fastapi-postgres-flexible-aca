@@ -2,18 +2,25 @@
 # ruff: noqa: UP006
 
 import typing
+import os
 
 from sqlmodel import Field, Relationship, SQLModel, create_engine
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
 
-connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, echo=True, connect_args=connect_args)
+POSTGRES_USER =  os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+POSTGRES_DB = os.environ.get("POSTGRES_DB")
 
+sql_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DB}"
+
+if os.environ.get("RUNNING_IN_PRODUCTION", False):
+    sql_url = f"{sql_url}?sslmode=require"
+
+engine = create_engine(sql_url, echo=True)
 
 def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
+    return SQLModel.metadata.create_all(engine)
 
 class CruiseDestinationLink(SQLModel, table=True):
     destination_id: typing.Optional[int] = Field(
@@ -26,7 +33,6 @@ class CruiseDestinationLink(SQLModel, table=True):
         foreign_key="cruise.id",
         primary_key=True,
     )
-
 
 class Destination(SQLModel, table=True):
     id: typing.Optional[int] = Field(default=None, primary_key=True)
