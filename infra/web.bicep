@@ -46,16 +46,12 @@ module app 'core/host/container-app-upsert.bicep' = {
         value: postgresDatabaseName
       }
       {
-        name: 'DJANGO_POSTGRES_KEYVAULT'
+        name: 'FASTAPI_POSTGRES_KEYVAULT'
         value: keyVault.name
       }
       {
         name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
         value: applicationInsights.properties.ConnectionString
-      }
-      {
-        name: 'DJANGO_SECRET_KEY'
-        secretRef: 'django-secret-key'
       }
       {
         name: 'POSTGRES_PASSWORD'
@@ -66,10 +62,6 @@ module app 'core/host/container-app-upsert.bicep' = {
         {
           name: 'postgres-password'
           value: postgresPassword
-        }
-        {
-          name: 'django-secret-key'
-          value: djangoSecretKey
         }
       ]
     targetPort: 8000 

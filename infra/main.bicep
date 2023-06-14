@@ -115,7 +115,6 @@ module web 'web.bicep' = {
     postgresUser: postgresUser
     postgresDatabaseName: postgresDatabaseName
     postgresPassword: postgresPassword
-    djangoSecretKey: djangoSecretKey
     exists: webAppExists
   }
 }
@@ -134,10 +133,6 @@ var secrets = [
   {
     name: 'POSTGRESPASSWORD'
     value: postgresPassword
-  }
-  {
-    name: 'DJANGOSECRETKEY'
-    value: djangoSecretKey
   }
 ]
 
