@@ -134,4 +134,4 @@ dmypy.json
 
 # From collectstatic
 staticfiles/
-demo-code/database.db
+demo_code/database.db

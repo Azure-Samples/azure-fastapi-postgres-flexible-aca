@@ -13,10 +13,6 @@ param location string
 @description('PostgreSQL Server administrator password')
 param postgresPassword string
 
-@secure()
-@description('Django Secret Key')
-param djangoSecretKey string
-
 param webAppExists bool = false
 
 @description('Id of the user or app to assign application roles')
@@ -115,7 +111,6 @@ module web 'web.bicep' = {
     postgresUser: postgresUser
     postgresDatabaseName: postgresDatabaseName
     postgresPassword: postgresPassword
-    djangoSecretKey: djangoSecretKey
     exists: webAppExists
   }
 }
@@ -134,10 +129,6 @@ var secrets = [
   {
     name: 'POSTGRESPASSWORD'
     value: postgresPassword
-  }
-  {
-    name: 'DJANGOSECRETKEY'
-    value: djangoSecretKey
   }
 ]
 

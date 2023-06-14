@@ -16,9 +16,6 @@
       },
       "postgresPassword": {
         "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} POSTGRESPASSWORD)"
-      },
-      "djangoSecretKey": {
-        "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} DJANGOSECRETKEY)"
       }
     }
   }
