@@ -22,7 +22,7 @@ services:
     platform: linux/amd64
     build:
       context: .
-      dockerfile: ./demo-code/Dockerfile
+      dockerfile: ./demo_code/Dockerfile
     depends_on:
       - db
 

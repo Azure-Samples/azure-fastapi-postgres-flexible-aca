@@ -14,8 +14,6 @@ param postgresDatabaseName string
 param postgresUser string
 @secure()
 param postgresPassword string
-@secure()
-param djangoSecretKey string
 
 resource webIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName

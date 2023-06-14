@@ -13,10 +13,6 @@ param location string
 @description('PostgreSQL Server administrator password')
 param postgresPassword string
 
-@secure()
-@description('Django Secret Key')
-param djangoSecretKey string
-
 param webAppExists bool = false
 
 @description('Id of the user or app to assign application roles')

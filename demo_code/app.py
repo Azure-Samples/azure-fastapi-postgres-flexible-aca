@@ -3,25 +3,18 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from models import (
-    create_db_and_tables,
-    InfoRequest,
-    Cruise,
-    Destination,
-    engine,
-)
-
 import os
 from sqlmodel import Session, select
+from models import (
+    Destination,
+    Cruise,
+    InfoRequest,
+    engine
+)
 
 app = FastAPI()
 app.mount('/mount', StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
 
 
 @app.get("/", response_class=HTMLResponse)
