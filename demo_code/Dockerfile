@@ -17,5 +17,7 @@ RUN python -m pip install -r requirements.txt
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
+EXPOSE 3100 
+
 COPY . .
 CMD bash -c ". entrypoint.sh"
