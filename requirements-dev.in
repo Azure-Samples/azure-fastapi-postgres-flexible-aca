@@ -1,4 +1,4 @@
--r demo-code/requirements.txt
+-r demo_code/requirements.txt
 playwright
 pytest
 pytest-cov
