@@ -1,20 +1,18 @@
-from fastapi import FastAPI, Request, Form
+import os
+
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
-import os
+from models import Cruise, Destination, InfoRequest, engine
 from sqlmodel import Session, select
-from models import (
-    Destination,
-    Cruise,
-    InfoRequest,
-    engine
-)
 
 app = FastAPI()
 app.mount('/mount', StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(
+    directory="templates",
+    )
+templates.env.globals["prod"] = os.environ.get("RUNNING_IN_PRODUCTION", False)
 
 
 @app.get("/", response_class=HTMLResponse)

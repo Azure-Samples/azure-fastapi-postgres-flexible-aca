@@ -55,6 +55,10 @@ module app 'core/host/container-app-upsert.bicep' = {
         name: 'POSTGRES_PASSWORD'
         secretRef: 'postgres-password'
       }
+      {
+        name: 'RUNNING_IN_PRODUCTION'
+        value: 'true'
+      }
       ]
     secrets: [
         {

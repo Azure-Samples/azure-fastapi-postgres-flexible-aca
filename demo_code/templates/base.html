@@ -1,5 +1,8 @@
 <html lang="en">
 <head>
+    {% if prod %}
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', path='res/css/theme.css') }}" />
     <title>
         {% block title %}
