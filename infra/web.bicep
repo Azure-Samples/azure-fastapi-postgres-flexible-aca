@@ -62,7 +62,7 @@ module app 'core/host/container-app-upsert.bicep' = {
           value: postgresPassword
         }
       ]
-    targetPort: 8000 
+    targetPort: 3100 
   }
 }
 

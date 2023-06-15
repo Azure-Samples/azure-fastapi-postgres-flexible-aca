@@ -6,3 +6,4 @@ sqlmodel
 jinja2
 uvicorn[standard]
 python-multipart
+gunicorn
