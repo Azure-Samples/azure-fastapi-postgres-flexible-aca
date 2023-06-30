@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 
 from . import db, models
 
-bp = Blueprint("cruises", __name__)
+bp = Blueprint("pages", __name__)
 
 
 @bp.get("/")
@@ -32,14 +32,15 @@ def cruise_detail(pk: int):
 
 @bp.get("/info_request/")
 def info_request():
-    return render_template("info_request_create.html")
+    all_cruises = db.session.execute(db.select(models.Cruise)).scalars().all()
+    return render_template("info_request_create.html", cruises=all_cruises, message=request.args.get("message"))
 
 
 @bp.post("/info_request/")
 def create_info_request():
-    # make info request from form data
-    db_info_request = models.InfoRequest(name=request.form["name"], email=request.form["email"], notes=request.form["notes"], cruise_id=request.form["cruise_id"])
-    # save info request to database
+    name = request.form["name"]
+    db_info_request = models.InfoRequest(name=name, email=request.form["email"], notes=request.form["notes"], cruise_id=request.form["cruise_id"])
     db.session.add(db_info_request)
     db.session.commit()
-    return db_info_request
+    success_message = f"Thank you, {name}! We will email you when we have more information!"
+    return redirect(url_for('pages.info_request', message=success_message))

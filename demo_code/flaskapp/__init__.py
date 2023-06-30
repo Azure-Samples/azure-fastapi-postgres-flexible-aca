@@ -30,9 +30,9 @@ def create_app(test_config=None):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from . import relecloud
+    from . import pages
 
-    app.register_blueprint(relecloud.bp)
+    app.register_blueprint(pages.bp)
 
     @app.cli.command("seed")
     @click.option('--filename', default="seed_data.json")
