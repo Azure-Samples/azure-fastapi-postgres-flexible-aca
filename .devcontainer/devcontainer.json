@@ -17,7 +17,7 @@
     "workspaceFolder": "/workspace",
 	"forwardPorts": [8000, 5432],
     "portsAttributes": {
-		"8000": {"label": "FastAPI port", "onAutoForward": "notify"},
+		"8000": {"label": "Flask port", "onAutoForward": "notify"},
 		"5432": {"label": "PostgreSQL port", "onAutoForward": "silent"}
 	},
     "customizations": {
@@ -29,12 +29,24 @@
 				"ms-python.black-formatter",
 				"microsoft.bicep",
 				"bierner.github-markdown-preview",
-                "ms-azuretools.vscode-docker"
-			]
+                "ms-azuretools.vscode-docker",
+                "mtxr.sqltools",
+				"mtxr.sqltools-driver-pg"
+			],
+            "settings": {
+                "sqltools.connections": [
+					{
+						"name": "Local database",
+						"driver": "PostgreSQL",
+						"server": "db",
+						"port": 5432,
+						"database": "relecloud",
+						"username": "postgres",
+						"password": "postgres"
+					}
+				]
+            }
         }
-    },
-	// "postCreateCommand": "cd demo_code",
-	"features": {
-		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-	}
+    }
+	//"postCreateCommand": "python3 -m flask seed --filename seed_data.json"
 }

@@ -11,7 +11,7 @@ If you can imagine it, we travel to it! Below is our list of confirmed destinati
 </p>
 <div class="list-group">
     {% for destination in destinations %}
-    <a class="list-group-item list-group-item-action" href="{{ url_for('destination_detail', pk=destination.id) }}">
+    <a class="list-group-item list-group-item-action" href="{{ url_for('cruises.destination_detail', pk=destination.id) }}">
         {{ destination }}
     </a>
     {% endfor %}

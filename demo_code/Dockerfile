@@ -7,8 +7,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 RUN python -m pip install --upgrade pip
 
-
-
 WORKDIR /demo-code
 
 COPY requirements.txt .
