@@ -1,3 +1,8 @@
+# Deploy a FastAPI Application via Azure Container Apps
+
+This project deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The FastAPI application is a simple web application for a space travel agency. The application is built using the FastAPI framework and uses a PostgreSQL database with SQLModel as an ORM. The application can be deployed to Azure using the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
+
+
 ## Opening the project
 
 This project has [Dev Container support](https://code.visualstudio.com/docs/devcontainers/containers), so it will be be setup automatically if you open it in Github Codespaces or in local VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
