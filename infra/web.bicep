@@ -9,11 +9,11 @@ param exists bool
 param identityName string
 param keyVaultName string
 param serviceName string = 'web'
-param postgresDomainName string
-param postgresDatabaseName string
-param postgresUser string
+param dbserverDomainName string
+param dbserverDatabaseName string
+param dbserverUser string
 @secure()
-param postgresPassword string
+param dbserverPassword string
 
 resource webIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName
@@ -32,41 +32,41 @@ module app 'core/host/container-app-upsert.bicep' = {
     containerRegistryName: containerRegistryName
     env: [
       {
-        name: 'POSTGRES_HOST'
-        value: postgresDomainName
+        name: 'DBSERVER_HOST'
+        value: dbserverDomainName
       }
       {
-        name: 'POSTGRES_USER'
-        value: postgresUser
+        name: 'DBSERVER_USER'
+        value: dbserverUser
       }
       {
-        name: 'POSTGRES_DB'
-        value: postgresDatabaseName
+        name: 'DBSERVER_DB'
+        value: dbserverDatabaseName
       }
       {
-        name: 'FASTAPI_POSTGRES_KEYVAULT'
+        name: 'KEYVAULT'
         value: keyVault.name
       }
+      {
+        name: 'RUNNING_IN_PRODUCTION'
+        value: 'true'
+      } 
       {
         name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
         value: applicationInsights.properties.ConnectionString
       }
       {
-        name: 'POSTGRES_PASSWORD'
-        secretRef: 'postgres-password'
-      }
-      {
-        name: 'RUNNING_IN_PRODUCTION'
-        value: 'true'
+        name: 'DBSERVER_PASSWORD'
+        secretRef: 'dbserver-password'
       }
       ]
     secrets: [
         {
-          name: 'postgres-password'
-          value: postgresPassword
+          name: 'dbserver-password'
+          value: dbserverPassword
         }
       ]
-    targetPort: 3100 
+    targetPort: 8000 
   }
 }
 

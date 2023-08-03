@@ -2,38 +2,36 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 
-param sku object
-param storage object
 param administratorLogin string
 @secure()
 param administratorLoginPassword string
-param databaseNames array = []
+
+param coordinatorServerEdition string
+param coordinatorStorageQuotainMb int
+param coordinatorVCores int
+param databaseName string
+param nodeCount int
+param nodeVCores int
 param allowAzureIPsFirewall bool = false
 param allowAllIPsFirewall bool = false
 param allowedSingleIPs array = []
+param postgresqlVersion string
 
-// PostgreSQL version
-param version string
-
-// Latest official version 2022-12-01 does not have Bicep types available
-resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
+resource postgresCluster 'Microsoft.DBforPostgreSQL/serverGroupsv2@2023-03-02-preview' = {
+  name: name
   location: location
   tags: tags
-  name: name
-  sku: sku
   properties: {
-    version: version
     administratorLogin: administratorLogin
     administratorLoginPassword: administratorLoginPassword
-    storage: storage
-    highAvailability: {
-      mode: 'Disabled'
-    }
+    coordinatorServerEdition: coordinatorServerEdition
+    coordinatorStorageQuotaInMb: coordinatorStorageQuotainMb
+    coordinatorVCores: coordinatorVCores
+    postgresqlVersion: postgresqlVersion
+    nodeCount: nodeCount
+    nodeVCores: nodeVCores
+    databaseName: databaseName
   }
-
-  resource database 'databases' = [for name in databaseNames: {
-    name: name
-  }]
 
   resource firewall_all 'firewallRules' = if (allowAllIPsFirewall) {
     name: 'allow-all-IPs'
@@ -61,4 +59,4 @@ resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' =
 
 }
 
-output DOMAIN_NAME string = postgresServer.properties.fullyQualifiedDomainName
+output DOMAIN_NAME string = postgresCluster.properties.serverNames[0].fullyQualifiedDomainName

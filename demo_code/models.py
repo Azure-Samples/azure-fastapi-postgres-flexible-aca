@@ -6,13 +6,12 @@ import os
 
 from sqlmodel import Field, Relationship, SQLModel, create_engine
 
+DBSERVER_USER =  os.environ.get("DBSERVER_USER")
+DBSERVER_PASSWORD = os.environ.get("DBSERVER_PASSWORD")
+DBSERVER_HOST = os.environ.get("DBSERVER_HOST")
+DBSERVER_DB = os.environ.get("DBSERVER_DB")
 
-POSTGRES_USER =  os.environ.get("POSTGRES_USER")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_DB = os.environ.get("POSTGRES_DB")
-
-sql_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DB}"
+sql_url = f"postgresql://{DBSERVER_USER}:{DBSERVER_PASSWORD}@{DBSERVER_HOST}/{DBSERVER_DB}"
 
 if os.environ.get("RUNNING_IN_PRODUCTION", False):
     sql_url = f"{sql_url}?sslmode=require"

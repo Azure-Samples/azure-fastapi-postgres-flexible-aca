@@ -2,4 +2,5 @@
 
 set -e
 
-gunicorn app:app
+python3 seed_data.py
+python3 -m gunicorn app:app

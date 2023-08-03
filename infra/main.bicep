@@ -10,10 +10,10 @@ param name string
 param location string
 
 @secure()
-@description('PostgreSQL Server administrator password')
-param postgresPassword string
-
+@description('DBServer administrator password')
+param dbserverPassword string
 param webAppExists bool = false
+
 
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
@@ -28,9 +28,8 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 var prefix = '${name}-${resourceToken}'
-
-var postgresUser = 'postgres'
-var postgresDatabaseName = 'relecloud'
+var dbserverUser = 'admin${uniqueString(resourceGroup.id)}'
+var dbserverDatabaseName = 'relecloud'
 
 // Store secrets in a keyvault
 module keyVault './core/security/keyvault.bicep' = {
@@ -44,8 +43,9 @@ module keyVault './core/security/keyvault.bicep' = {
   }
 }
 
-module postgresServer 'core/database/postgresql/flexibleserver.bicep' = {
-  name: 'postgresql'
+
+module dbserver 'core/database/postgresql/flexibleserver.bicep' = {
+  name: 'dbserver'
   scope: resourceGroup
   params: {
     name: '${prefix}-postgresql'
@@ -58,10 +58,10 @@ module postgresServer 'core/database/postgresql/flexibleserver.bicep' = {
     storage: {
       storageSizeGB: 32
     }
-    version: '14' // 14 is the latest supported version with 15 Coming Soon
-    administratorLogin: postgresUser
-    administratorLoginPassword: postgresPassword
-    databaseNames: [postgresDatabaseName]
+    version: '15'
+    administratorLogin: dbserverUser
+    administratorLoginPassword: dbserverPassword
+    databaseNames: [dbserverDatabaseName]
     allowAzureIPsFirewall: true
   }
 }
@@ -107,10 +107,10 @@ module web 'web.bicep' = {
     containerAppsEnvironmentName: containerApps.outputs.environmentName
     containerRegistryName: containerApps.outputs.registryName
     keyVaultName: keyVault.outputs.name
-    postgresDomainName: postgresServer.outputs.POSTGRES_DOMAIN_NAME
-    postgresUser: postgresUser
-    postgresDatabaseName: postgresDatabaseName
-    postgresPassword: postgresPassword
+    dbserverDomainName: dbserver.outputs.DOMAIN_NAME
+    dbserverUser: dbserverUser
+    dbserverDatabaseName: dbserverDatabaseName
+    dbserverPassword: dbserverPassword
     exists: webAppExists
   }
 }
@@ -127,8 +127,8 @@ module webKeyVaultAccess './core/security/keyvault-access.bicep' = {
 
 var secrets = [
   {
-    name: 'POSTGRESPASSWORD'
-    value: postgresPassword
+    name: 'DBSERVERPASSWORD'
+    value: dbserverPassword
   }
 ]
 
@@ -147,9 +147,9 @@ output AZURE_LOCATION string = location
 output AZURE_CONTAINER_ENVIRONMENT_NAME string = containerApps.outputs.environmentName
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerApps.outputs.registryLoginServer
 output AZURE_CONTAINER_REGISTRY_NAME string = containerApps.outputs.registryName
-output POSTGRES_DATABASE_NAME string = postgresDatabaseName
-output POSTGRES_DOMAIN_NAME string = postgresServer.outputs.POSTGRES_DOMAIN_NAME
-output POSTGRES_USER string = postgresUser
+output DBSERVER_DATABASE_NAME string = dbserverDatabaseName
+output DBSERVER_DOMAIN_NAME string = dbserver.outputs.DOMAIN_NAME
+output DBSERVER_USER string = dbserverUser
 output SERVICE_WEB_IDENTITY_PRINCIPAL_ID string = web.outputs.SERVICE_WEB_IDENTITY_PRINCIPAL_ID
 output SERVICE_WEB_NAME string = web.outputs.SERVICE_WEB_NAME
 output SERVICE_WEB_URI string = web.outputs.SERVICE_WEB_URI

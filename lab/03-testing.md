@@ -67,12 +67,12 @@ Navigate to the `demo-code` folder and run the `test` command:
 
 This is great, however we may forget to run these tests every time we make a change. We can use GitHub Actions to run these tests for us.
 
-We've included a [GitHub Action](../.github/workflows/test.yml) that will run our tests for us inside of a containerized environment.
+We've included a [GitHub Action](./../.github/workflows/test.yml) that will run our tests for us inside of a containerized environment.
 
 > **:mag: Explore**
 > You can use the GitHub Actions Extension in VS Code (included in your Dev Container) to view the GitHub Action that is running our tests.
 
-![The GitHub Actions Pane in VS Code](../assets/view%20Actions.png)
+![The GitHub Actions Pane in VS Code](./../assets/view%20Actions.png)
 
 ## Next
 

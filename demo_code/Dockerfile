@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM mcr.microsoft.com/devcontainers/python:3.11-bullseye
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends postgresql-client \
@@ -7,8 +7,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 RUN python -m pip install --upgrade pip
 
-
-
 WORKDIR /demo-code
 
 COPY requirements.txt .
@@ -16,8 +14,6 @@ RUN python -m pip install -r requirements.txt
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
-
-EXPOSE 3100 
 
 COPY . .
 CMD bash -c ". entrypoint.sh"

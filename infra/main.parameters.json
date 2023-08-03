@@ -14,8 +14,7 @@
       "webAppExists": {
         "value": "${SERVICE_WEB_RESOURCE_EXISTS=false}"
       },
-      "postgresPassword": {
-        "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} POSTGRESPASSWORD)"
-      }
-    }
+      "dbserverPassword": {
+        "value": "$(secretOrRandomPassword ${AZURE_KEY_VAULT_NAME} DBSERVERPASSWORD)"
+      }    }
   }

@@ -24,9 +24,9 @@ The code we will deploy exists in the `demo-code` folder. This is a [Django](htt
 
 ## Creating our Environment using Docker/Docker Compose
 
-You may notice we have 2 Docker Compose files and 2 Dockerfiles. [docker-compose.yml](../docker-compose.yml) serves as the base configuration for all of the development environments. This ensures that your deployment environment is as close to your development environment as possible.
+You may notice we have 2 Docker Compose files and 2 Dockerfiles. [docker-compose.yml](./../docker-compose.yml) serves as the base configuration for all of the development environments. This ensures that your deployment environment is as close to your development environment as possible.
 
- [.devcontainer/docker-compose_dev.yml](../.devcontainer/docker-compose_dev.yml) and [.devcontainer/Dockerfile_dev](../.devcontainer/Dockerfile_dev) are used to configure the development environment when using [Dev Containers](https://code.visualstudio.com/docs/remote/containers) or [Codespaces](https://codespaces.github.com). `Dockerfile_dev` provides configuration changes specific to local testing to ensure that our testing database is configured correctly, while remaining separate from production.
+ [.devcontainer/docker-compose_dev.yml](./../../.devcontainer_fastapi/docker-compose_dev.yml) and [.devcontainer/Dockerfile_dev](./../../.devcontainer_fastapi/Dockerfile_dev) are used to configure the development environment when using [Dev Containers](https://code.visualstudio.com/docs/remote/containers) or [Codespaces](https://codespaces.github.com). `Dockerfile_dev` provides configuration changes specific to local testing to ensure that our testing database is configured correctly, while remaining separate from production.
 
 > **:book: Learn More**
 > 
@@ -34,7 +34,7 @@ You may notice we have 2 Docker Compose files and 2 Dockerfiles. [docker-compose
 
 ## Infrastructure as Code and Azure Developer CLI (AZD)
 
-Finally, [demo-code/Dockerfile](../demo-code/Dockerfile) is used to build the image that will be deployed to Azure using the Azure Developer CLI (AZD).  We also have an [infra](../infra/) folder that contains the [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) templates used to deploy the infrastructure to Azure using the [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). We'll take a look at these files later in the lab, but this is key to being able to deploy our code rapidly and reliably.
+Finally, [demo-code/Dockerfile](./../demo-code/Dockerfile) is used to build the image that will be deployed to Azure using the Azure Developer CLI (AZD).  We also have an [infra](./../infra) folder that contains the [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) templates used to deploy the infrastructure to Azure using the [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). We'll take a look at these files later in the lab, but this is key to being able to deploy our code rapidly and reliably.
 
 We will talk more about AZD later in the lab.
 ## Next

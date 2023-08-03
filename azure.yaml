@@ -1,15 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: azure-fastapi-postgres-aca
+name: azure-fastapi-postgres-flexible-aca
 metadata:
-    # template: azure-django-postgres-aca@0.0.1
+    template: azure-fastapi-postgres-flexible-aca
 infra:
     provider: "bicep"
 services:
     web:
-        project: ./demo_code
+        project: demo_code
         module: web
         language: py
         host: containerapp
-# metadata:
-#     template: django-postgres-aca@0.0.1-beta
+
