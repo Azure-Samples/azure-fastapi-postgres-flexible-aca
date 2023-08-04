@@ -3,8 +3,9 @@ from multiprocessing import Process
 import pytest
 import uvicorn
 
-import seed_data
-from app import app
+from fastapi_app import seed_data
+from fastapi_app.app import app
+
 
 def run_server():
     uvicorn.run(app)

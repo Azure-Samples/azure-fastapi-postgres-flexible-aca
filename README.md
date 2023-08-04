@@ -17,12 +17,16 @@ If you're not using one of those options for opening the project, then you'll ne
     python -m pip install -r demo_code/requirements.txt
     ```
 
+1. Install the app as an editable package:
 
+    ```sh
+    python -m pip install -e demo_code
+    ```
 
 1. Apply database migrations and seed initial data:
-    
+
     ```sh
-    python3 seed_data.py
+    python3 demo_code/fastapi_app/seed_data.py
     ```
 
 ## Running locally
@@ -30,7 +34,7 @@ If you're not using one of those options for opening the project, then you'll ne
 Run gunicorn on the app:
 
 ```sh
-python3 -m gunicorn app:app
+python3 -m gunicorn fastapi_app:app -c demo_code/gunicorn.conf.py
 ```
 
 ## Running tests

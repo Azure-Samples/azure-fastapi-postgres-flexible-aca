@@ -1,9 +1,0 @@
-fastapi
-psycopg2-binary
-sqlmodel
-# opencensus-ext-azure 
-# opencensus-ext-django
-jinja2
-uvicorn[standard]
-python-multipart
-gunicorn

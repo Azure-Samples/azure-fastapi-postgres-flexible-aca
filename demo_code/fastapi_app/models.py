@@ -1,8 +1,7 @@
 # ruff: noqa: UP007
 # ruff: noqa: UP006
-
-import typing
 import os
+import typing
 
 from sqlmodel import Field, Relationship, SQLModel, create_engine
 
