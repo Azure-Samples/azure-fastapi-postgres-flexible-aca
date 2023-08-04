@@ -4,7 +4,7 @@
 
 In this lab, you will deploy a Space Tourism site powered by Django and PostgreSQL using Azure Container Apps.
 
-![Relecloud Site](../assets/Relecloud%20Site.png)
+![Relecloud Site](./../assets/Relecloud%20Site.png)
 
 
 The steps below will get you up and running to deploy the Relecloud Django application to Azure Container Apps.
@@ -18,7 +18,7 @@ The steps below will get you up and running to deploy the Relecloud Django appli
 
 Open the [Azure-Samples/azure-django-postgres-aca](https://github.com/Azure-Samples/azure-django-postgres-aca) repository, click the **Use this Template** button at the top right hand corner, and select **Create a new repository**.
 
-![The green "Use this Template" button in the top right section of the repo page on GitHub](../assets/use-this-template.png)
+![The green "Use this Template" button in the top right section of the repo page on GitHub](./../assets/use-this-template.png)
 
 Once you have created the repo, launch the repo in GitHub Codespaces or clone it to your local machine:
 
@@ -28,7 +28,7 @@ You can use [GitHub Codespaces](http://aka.ms/codespaces) to launch your repo in
 
 Select the green **Code** button in the top right section of the repo page on GitHub and select **Open with Codespaces**. If you haven't created a Codespace before, you will be prompted to create one. Once created, you will be taken to your Codespace environment.
 
-![Create a Codespace](../assets/create%20a%20codespace.png)
+![Create a Codespace](./../assets/create%20a%20codespace.png)
 
 You can choose to work inside your browser or open that Codespace using your local Visual Studio Code.
 
@@ -40,7 +40,7 @@ You can choose to work inside your browser or open that Codespace using your loc
 
 ### Do I need a virtual environment and `pip install`?
 
-**No**, because we are operating inside of a containerized environment, we've gone ahead and installed all of the tools needed for this lab. You can see the list of tools installed in the [devcontainer.json](../.devcontainer/devcontainer.json) file, as well as the [requirements.txt](../demo-code/requirements.txt) and [requirements-dev.txt](../requirements-dev.txt) files.
+**No**, because we are operating inside of a containerized environment, we've gone ahead and installed all of the tools needed for this lab. You can see the list of tools installed in the [devcontainer.json](./../../.devcontainer_fastapi/devcontainer.json) file, as well as the [requirements.txt](./../demo-code/requirements.txt) and [requirements-dev.txt](./../requirements-dev.txt) files.
 
 ---
 

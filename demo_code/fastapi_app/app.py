@@ -1,17 +1,18 @@
 import os
+import pathlib
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from models import Cruise, Destination, InfoRequest, engine
 from sqlmodel import Session, select
 
+from .models import Cruise, Destination, InfoRequest, engine
+
 app = FastAPI()
-app.mount('/mount', StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(
-    directory="templates",
-    )
+parent_path = pathlib.Path(__file__).parent.parent
+app.mount("/mount", StaticFiles(directory=parent_path / "static"), name="static")
+templates = Jinja2Templates(directory=parent_path / "templates")
 templates.env.globals["prod"] = os.environ.get("RUNNING_IN_PRODUCTION", False)
 
 
@@ -19,9 +20,11 @@ templates.env.globals["prod"] = os.environ.get("RUNNING_IN_PRODUCTION", False)
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @app.get("/about", response_class=HTMLResponse)
 def about(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
+
 
 @app.get("/destinations", response_class=HTMLResponse)
 def destinations(request: Request):
@@ -33,13 +36,14 @@ def destinations(request: Request):
 @app.get("/destination/{pk}", response_class=HTMLResponse)
 def destination_detail(request: Request, pk: int):
     with Session(engine) as session:
-        destination = session.exec(select(Destination).where(Destination.id==pk)).first()
+        destination = session.exec(select(Destination).where(Destination.id == pk)).first()
         return templates.TemplateResponse("destination_detail.html", {"request": request, "destination": destination})
+
 
 @app.get("/cruise/{pk}")
 def cruise_detail(request: Request, pk: int):
     with Session(engine) as session:
-        cruise = session.exec(select(Cruise).where(Cruise.id==pk)).first()
+        cruise = session.exec(select(Cruise).where(Cruise.id == pk)).first()
         return templates.TemplateResponse("cruise_detail.html", {"request": request, "cruise": cruise})
 
 

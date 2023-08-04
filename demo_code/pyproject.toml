@@ -1,0 +1,15 @@
+[project]
+name = "fastapi_app"
+version = "1.0.0"
+description = "A web app using SQLModel and PostgreSQL"
+dependencies = [
+    "fastapi==0.100.1",
+    "sqlmodel==0.0.8",
+    "jinja2==3.1.2",
+    "uvicorn[standard]==0.23.2",
+    "python-multipart==0.0.6",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

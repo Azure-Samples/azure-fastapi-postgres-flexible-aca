@@ -1,39 +1,53 @@
 # Deploy a FastAPI Application via Azure Container Apps
 
-This project will walkthrough the steps to deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The FastAPI application is a simple web application for a space travel agency. The application is built using FastAPI framework and uses a PostgreSQL database with SQLModel as an ORM. The application can be deployed to Azure using  [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview). With the command `azd up`.
-
-![Visualization of Application](assets/bicep-visualization.png)
-
-## Prerequisites
-
-You'll need a GitHub account. If you don't have a GitHub account, create a [free account](https://github.com/signup)
-
-If you're using VS Code we recommend that you develop in a dev container. This will ensure that you have all the tools you need to build and run the application. You will need docker installed and running. To learn more about dev containers, see [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers).
+This project deploy a [FastAPI](https://fastapi.tiangolo.com) application to [Azure Container Apps](https://aka.ms/aca). The FastAPI application is a simple web application for a space travel agency. The application is built using the FastAPI framework and uses a PostgreSQL database with SQLModel as an ORM. The application can be deployed to Azure using the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
 
 
-### Deploy to Azure
+## Opening the project
 
-You can deploy your application from your cloned repo using Azure Developer CLI.
-1. Open a terminal, create a new empty folder, and change into it.
-2. Initialize your project using the following command:
+This project has [Dev Container support](https://code.visualstudio.com/docs/devcontainers/containers), so it will be be setup automatically if you open it in Github Codespaces or in local VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
-[REPLACE] - `azd init --template azure-django-postgres-aca`
+If you're not using one of those options for opening the project, then you'll need to:
 
-This command will clone the code to your current folder and prompt you for the following information:
+1. Create a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) and activate it.
 
-- Environment Name: This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
+1. Install production requirements:
 
-3. Provision and deploy your project with the following command
-`azd up`
+    ```sh
+    python -m pip install -r demo_code/requirements.txt
+    ```
 
-This command will prompt you for the following information:
+1. Install the app as an editable package:
 
-Azure Location: The Azure location where your resources will be deployed.
-Azure Subscription: The Azure Subscription where your resources will be deployed.
+    ```sh
+    python -m pip install -e demo_code
+    ```
 
-## Resources
+1. Apply database migrations and seed initial data:
 
-Check out the resources to Learn more about:
+    ```sh
+    python3 demo_code/fastapi_app/seed_data.py
+    ```
 
-- [Deploy your First Container App](https://learn.microsoft.com/en-us/azure/container-apps/get-started?tabs=bash)
-- [Deploy to Azure Container Apps using Visual Studio Code](https://learn.microsoft.com/en-us/azure/container-apps/deploy-visual-studio-code)
+## Running locally
+
+Run gunicorn on the app:
+
+```sh
+python3 -m gunicorn fastapi_app:app -c demo_code/gunicorn.conf.py
+```
+
+## Running tests
+
+2. Install the development requirements:
+
+    ```sh
+    python3 -m pip install -r requirements-dev.in
+    playwright install --with-deps
+    ```
+
+3. Run the tests:
+
+    ```sh
+    python3 -m pytest
+    ```

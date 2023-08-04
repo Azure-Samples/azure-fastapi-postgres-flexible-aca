@@ -4,7 +4,7 @@ You can also redeploy your project to Azure using GitHub Actions. This will allo
 
 ## Using GitHub Actions
 
-We've included a GitHub Action workflow file in [azure-dev.yaml](../.github/workflows/azure-dev.yaml). This workflow runs the provision and deployment steps using Federated Credentials.
+We've included a GitHub Action workflow file in [azure-dev.yaml](./../.github/workflows/azure-dev.yaml). This workflow runs the provision and deployment steps using Federated Credentials.
 
 To setup your GitHub repo, run the following command:
 
@@ -18,7 +18,7 @@ https://user-images.githubusercontent.com/8632637/231233580-c0f1d520-f81d-4db5-9
 
 The information required by the workflow will be added to your GitHub repo.
 
-![GitHub Actions Secrets and Variables](../assets/action-secrets-and-vars.png)
+![GitHub Actions Secrets and Variables](./../assets/action-secrets-and-vars.png)
 
 ## Running the GitHub Action
 
