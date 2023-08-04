@@ -10,6 +10,7 @@ from fastapi_app.app import app
 def run_server():
     uvicorn.run(app)
 
+
 @pytest.fixture(scope="session")
 def live_server():
     seed_data.load_from_json()
@@ -18,7 +19,6 @@ def live_server():
     yield
     proc.kill()
     seed_data.drop_all()
-
 
 
 @pytest.fixture(scope="session")

@@ -52,5 +52,6 @@ def load_from_json():
 def drop_all():
     SQLModel.metadata.drop_all(models.engine)
 
+
 if __name__ == "__main__":
     load_from_json()
