@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+ReleCloud - {{ cruise }}
+{% endblock %}
+
+{% block content %}
+<h1 id="page-title">{{ cruise }}</h1>
+<p>
+{{ cruise.description }}
+</p>
+<p>This cruise visits the following destinations:</p>
+<div class="list-group">
+    {% for destination in cruise.destinations %}
+    <a class="list-group-item list-group-item-action" href="{{ url_for('destination_detail', pk=destination.id) }}">{{ destination }}</a>
+
+    {% endfor %}
+</div>
+{% endblock content %}

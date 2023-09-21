@@ -1,0 +1,32 @@
+{
+  "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
+  "commit": "c1d81947006a8e4ac7915b5fcc92d385aa57735a",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "azure",
+      "project_backend": "fastapi",
+      "db_resource": "postgres-flexible",
+      "project_host": "aca",
+      "web_port": "8000",
+      "__repo_name": "azure-fastapi-postgres-flexible-aca",
+      "__src_folder_name": "azure_fastapi_postgres_flexible_aca",
+      "__project_short_description": "Create a relecloud demo application with fastapi and postgres-flexible",
+      "_copy_without_render": [
+        ".github/workflows/azure-dev.yml",
+        ".github/workflows/cruft.yml",
+        ".github/workflows/devcontainer-ci.yml",
+        ".github/workflows/format.yml"
+      ],
+      "_extensions": [
+        "extensions.GetUrlForBackend"
+      ],
+      "_jinja2_env_vars": {
+        "lstrip_blocks": true,
+        "trim_blocks": true
+      },
+      "_template": "https://github.com/kjaymiller/cookiecutter-relecloud"
+    }
+  },
+  "directory": null
+}

@@ -1,0 +1,7 @@
+# global requirements
+gunicorn==20.1.0
+uvicorn==0.23.2
+
+# postgres requirements
+psycopg2-binary==2.9.6
+
