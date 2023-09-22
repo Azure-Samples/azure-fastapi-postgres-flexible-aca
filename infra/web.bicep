@@ -7,17 +7,31 @@ param containerAppsEnvironmentName string
 param containerRegistryName string
 param exists bool
 param identityName string
-param keyVaultName string
 param serviceName string = 'web'
+param keyVaultName string
 param dbserverDomainName string
 param dbserverDatabaseName string
 param dbserverUser string
+
 @secure()
 param dbserverPassword string
 
 resource webIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName
   location: location
+}
+
+resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
+  name: keyVaultName
+}
+
+// Give the app access to KeyVault
+module webKeyVaultAccess './core/security/keyvault-access.bicep' = {
+  name: 'web-keyvault-access'
+  params: {
+    keyVaultName: keyVault.name
+    principalId: webIdentity.properties.principalId
+  }
 }
 
 module app 'core/host/container-app-upsert.bicep' = {
@@ -32,32 +46,28 @@ module app 'core/host/container-app-upsert.bicep' = {
     containerRegistryName: containerRegistryName
     env: [
       {
-        name: 'DBSERVER_HOST'
+        name: 'POSTGRES_HOST'
         value: dbserverDomainName
       }
       {
-        name: 'DBSERVER_USER'
+        name: 'POSTGRES_USERNAME'
         value: dbserverUser
       }
       {
-        name: 'DBSERVER_DB'
+        name: 'POSTGRES_DATABASE'
         value: dbserverDatabaseName
       }
       {
-        name: 'KEYVAULT'
-        value: keyVault.name
+        name: 'POSTGRES_PASSWORD'
+        secretRef: 'dbserver-password'
       }
       {
         name: 'RUNNING_IN_PRODUCTION'
         value: 'true'
-      } 
+      }
       {
         name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
         value: applicationInsights.properties.ConnectionString
-      }
-      {
-        name: 'DBSERVER_PASSWORD'
-        secretRef: 'dbserver-password'
       }
       ]
     secrets: [
@@ -66,12 +76,8 @@ module app 'core/host/container-app-upsert.bicep' = {
           value: dbserverPassword
         }
       ]
-    targetPort: 8000 
+    targetPort: 8000
   }
-}
-
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
-  name: keyVaultName
 }
 
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing = {

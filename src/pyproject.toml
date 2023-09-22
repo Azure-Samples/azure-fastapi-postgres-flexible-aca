@@ -1,7 +1,7 @@
 [project]
 name = "fastapi_app"
 version = "1.0.0"
-description = "A web app using SQLModel and PostgreSQL"
+description = "Create a relecloud demo application with fastapi and postgres-flexible"
 dependencies = [
     "fastapi==0.100.1",
     "sqlmodel==0.0.8",

@@ -22,11 +22,6 @@ def live_server():
 
 
 @pytest.fixture(scope="session")
-def mock_functions_env():
-    pass
-
-
-@pytest.fixture(scope="session")
 def live_server_url(live_server):
     """Returns the url of the live server"""
     return "http://localhost:8000"

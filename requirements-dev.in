@@ -1,9 +1,15 @@
--r demo_code/requirements.txt
-pytest
+-r src/requirements.txt
+
+# Cookiecutter Support
+cruft
+pip-tools
+
+# Testing Tools
 coverage
+pytest
 pytest-cov
 pytest-playwright
-pip-tools
+
+# Linters
 ruff
 black
-

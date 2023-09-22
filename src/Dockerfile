@@ -16,5 +16,4 @@ COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
 COPY . .
-RUN python -m pip install -e .
 CMD bash -c ". entrypoint.sh"
