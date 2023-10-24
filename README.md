@@ -4,7 +4,7 @@ This project deploys a web application for a space travel agency using FastAPI. 
 
 ## Opening the project
 
-This project has [Dev Container support](https://code.visualstudio.com/docs/devcontainers/containers), so it will be be setup automatically if you open it in Github Codespaces or in local VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+This project has [Dev Container support](https://code.visualstudio.com/docs/devcontainers/containers), so it will be setup automatically if you open it in Github Codespaces or in local VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
 If you're not using one of those options for opening the project, then you'll need to:
 
@@ -35,8 +35,9 @@ If you're not using one of those options for opening the project, then you'll ne
 Run gunicorn on the app:
 
 ```sh
-python3 -m gunicorn fastapi_app:app -c src/gunicorn.conf.py
+python3 -m gunicorn fastapi_app:app --reload
 ```
+
 
 ## Running tests
 
