@@ -9,8 +9,9 @@ POSTGRES_USERNAME = os.environ.get("POSTGRES_USERNAME")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
 POSTGRES_DATABASE = os.environ.get("POSTGRES_DATABASE")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
 
-sql_url = f"postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DATABASE}"
+sql_url = f"postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
 
 if os.environ.get("POSTGRES_SSL", "disable") != "disable":
     sql_url = f"{sql_url}?sslmode=require"
