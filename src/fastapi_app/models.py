@@ -13,8 +13,6 @@ POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
 
 sql_url = f"postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
 
-if os.environ.get("POSTGRES_SSL", "disable") != "disable":
-    sql_url = f"{sql_url}?sslmode=require"
 
 engine = create_engine(sql_url, echo=True)
 
