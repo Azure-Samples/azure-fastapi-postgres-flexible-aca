@@ -2,15 +2,10 @@
 line-length = 120
 select = ["E", "F", "I", "UP"]
 ignore = ["D203"]
+extend-exclude = ["src/flaskapp/migrations/"]
 
 [tool.ruff.isort]
 known-first-party = ["fastapi_app"]
 
-[tool.black]
-line-length = 120
-
 [tool.pytest.ini_options]
-addopts = "-ra --cov -vv"
-
-[tool.coverage.report]
-show_missing = true
+addopts = "-ra -vv"

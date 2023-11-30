@@ -1,7 +1,7 @@
-import socket
 import time
 from multiprocessing import Process
 
+import ephemeral_port_reserve
 import pytest
 import requests
 import uvicorn
@@ -24,30 +24,26 @@ def wait_for_server_ready(url: str, timeout: float = 10.0, check_interval: float
     raise RuntimeError(conn_error)
 
 
-@pytest.fixture(scope="session")
-def free_port() -> int:
-    """
-    Return a free port on localhost
-    """
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind(("", 0))
-        addr = s.getsockname()
-        port = addr[1]
-        return port
-
-
-def run_server(port):
+def run_server(port: int):
     uvicorn.run(app, port=port)
 
 
 @pytest.fixture(scope="session")
-def live_server_url(free_port: int):
+def live_server_url():
     """Returns the url of the live server"""
     seed_data.load_from_json()
+
+    # Start the process
+    hostname = ephemeral_port_reserve.LOCALHOST
+    free_port = ephemeral_port_reserve.reserve()
     proc = Process(target=run_server, args=(free_port,), daemon=True)
     proc.start()
-    url = f"http://localhost:{free_port}"
+
+    # Return the URL of the live server once it is ready
+    url = f"http://{hostname}:{free_port}"
     wait_for_server_ready(url, timeout=10.0, check_interval=0.5)
     yield url
+
+    # Clean up the process and database
     proc.kill()
     seed_data.drop_all()
