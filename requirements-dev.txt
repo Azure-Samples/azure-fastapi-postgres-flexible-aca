@@ -5,11 +5,9 @@ cruft
 pip-tools
 
 # Testing Tools
-coverage
 pytest
-pytest-cov
+ephemeral-port-reserve
 pytest-playwright
 
 # Linters
 ruff
-black
