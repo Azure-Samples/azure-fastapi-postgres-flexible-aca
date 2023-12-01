@@ -23,22 +23,9 @@
                 "charliermarsh.ruff",
                 "ms-python.python",
                 "ms-azuretools.vscode-docker",
-                "mtxr.sqltools",
-                "mtxr.sqltools-driver-pg",
                 "bierner.github-markdown-preview"
             ],
             "settings": {
-                "sqltools.connections": [
-                    {
-                        "name": "Local database",
-                        "driver": "PostgreSQL",
-                        "server": "db",
-                        "port": 5432,
-                        "database": "relecloud",
-                        "username": "postgres",
-                        "password": "postgres"
-                    }
-                ],
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
                 "python.testing.pytestEnabled": true,
                 "python.testing.unittestEnabled": false,
@@ -47,7 +34,7 @@
                     ".pytest_cache": true,
                     "__pycache__": true
                 },
-                [python]: {
+                "[python]": {
                     "editor.formatOnSave": true,
                     "editor.defaultFormatter": "charliermarsh.ruff",
                     "editor.codeActionsOnSave": {
@@ -63,6 +50,6 @@
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/azure/azure-dev/azd:latest": {}
     },
-    "postCreateCommand": "pip install -r requirements-dev.txt && pip install -e src && python3 src/fastapi_app/seed_data.py"
+    "postCreateCommand": "pip install -e && src playwright install chromium --with-deps && python3 src/fastapi_app/seed_data.py"
 }
 
