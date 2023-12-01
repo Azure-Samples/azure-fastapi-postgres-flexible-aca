@@ -47,7 +47,7 @@
                     ".pytest_cache": true,
                     "__pycache__": true
                 },
-                [python]: {
+                "[python]": {
                     "editor.formatOnSave": true,
                     "editor.defaultFormatter": "charliermarsh.ruff",
                     "editor.codeActionsOnSave": {
