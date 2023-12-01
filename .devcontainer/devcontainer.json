@@ -50,6 +50,6 @@
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/azure/azure-dev/azd:latest": {}
     },
-    "postCreateCommand": "pip install -e && src playwright install chromium --with-deps && python3 src/fastapi_app/seed_data.py"
+    "postCreateCommand": "playwright install chromium --with-deps && pip install -e src &&  python3 src/fastapi_app/seed_data.py"
 }
 
