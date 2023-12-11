@@ -1,5 +1,5 @@
+import multiprocessing
 import time
-from multiprocessing import Process
 
 import ephemeral_port_reserve
 import pytest
@@ -8,6 +8,9 @@ import uvicorn
 
 from fastapi_app import seed_data
 from fastapi_app.app import app
+
+# Set start method to "fork" to avoid issues with pickling on OSes that default to "spawn"
+multiprocessing.set_start_method("fork")
 
 
 def wait_for_server_ready(url: str, timeout: float = 10.0, check_interval: float = 0.5) -> bool:
@@ -36,7 +39,7 @@ def live_server_url():
     # Start the process
     hostname = ephemeral_port_reserve.LOCALHOST
     free_port = ephemeral_port_reserve.reserve()
-    proc = Process(target=run_server, args=(free_port,), daemon=True)
+    proc = multiprocessing.Process(target=run_server, args=(free_port,), daemon=True)
     proc.start()
 
     # Return the URL of the live server once it is ready
