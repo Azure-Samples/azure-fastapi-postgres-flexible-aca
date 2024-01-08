@@ -9,3 +9,6 @@ known-first-party = ["fastapi_app"]
 
 [tool.pytest.ini_options]
 addopts = "-ra -vv"
+
+[tool.coverage.report]
+show_missing = true

@@ -55,7 +55,7 @@ python3 -m uvicorn fastapi_app:app --reload --port=8000
 
     ```sh
     python3 -m pip install -r requirements-dev.txt
-    python3 -m playwright install --with-deps
+    python3 -m playwright install chromium --with-deps
     ```
 
 3. Run the tests:
