@@ -16,7 +16,7 @@ sql_url = f"postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}
 if POSTGRES_SSL:
     sql_url = f"{sql_url}?sslmode={POSTGRES_SSL}"
 
-engine = create_engine(sql_url, echo=True)
+engine = create_engine(sql_url)
 
 
 def create_db_and_tables():
