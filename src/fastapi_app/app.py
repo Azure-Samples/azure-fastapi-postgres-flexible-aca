@@ -1,6 +1,7 @@
 import os
 import pathlib
 
+from azure.monitor.opentelemetry import configure_azure_monitor
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -8,6 +9,9 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 
 from .models import Cruise, Destination, InfoRequest, engine
+
+if os.getenv("APPLICATIONINSIGHTS_CONNECTION_STRING"):
+    configure_azure_monitor()
 
 app = FastAPI()
 parent_path = pathlib.Path(__file__).parent.parent
@@ -39,14 +43,18 @@ def destinations(request: Request):
 def destination_detail(request: Request, pk: int):
     with Session(engine) as session:
         destination = session.exec(select(Destination).where(Destination.id == pk)).first()
-        return templates.TemplateResponse("destination_detail.html", {"request": request, "destination": destination})
+        return templates.TemplateResponse(
+            "destination_detail.html", {"request": request, "destination": destination, "cruises": destination.cruises}
+        )
 
 
 @app.get("/cruise/{pk}")
 def cruise_detail(request: Request, pk: int):
     with Session(engine) as session:
         cruise = session.exec(select(Cruise).where(Cruise.id == pk)).first()
-        return templates.TemplateResponse("cruise_detail.html", {"request": request, "cruise": cruise})
+        return templates.TemplateResponse(
+            "cruise_detail.html", {"request": request, "cruise": cruise, "destinations": cruise.destinations}
+        )
 
 
 @app.get("/info_request/", response_class=HTMLResponse)

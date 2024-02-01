@@ -3,6 +3,7 @@ name = "fastapi_app"
 version = "1.0.0"
 description = "Create a relecloud demo application with fastapi and postgres-flexible"
 dependencies = [
+    "azure-monitor-opentelemetry",
     "fastapi",
     "jinja2",
     "uvicorn[standard]",
