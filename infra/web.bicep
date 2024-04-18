@@ -74,12 +74,11 @@ module app 'core/host/container-app-upsert.bicep' = {
         value: applicationInsights.properties.ConnectionString
       }
       ]
-    secrets: [
-        {
-          name: 'dbserver-password'
-          value: dbserverPassword
-        }
-      ]
+    secrets: {
+          'dbserver-password': dbserverPassword
+     }
+    keyvaultIdentities: {
+    }
     targetPort: 8000
   }
 }
