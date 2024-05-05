@@ -12,9 +12,9 @@ from fastapi_app.app import app
 
 # Set start method to "fork" to avoid issues with pickling on OSes that default to "spawn"
 if sys.platform == "win32":
-    multiprocessing.set_start_method("spawn")
+    multiprocessing.set_start_method("spawn", force=True)
 else:
-    multiprocessing.set_start_method("fork")
+    multiprocessing.set_start_method("fork", force=True)
 
 
 def wait_for_server_ready(url: str, timeout: float = 10.0, check_interval: float = 0.5) -> bool:
