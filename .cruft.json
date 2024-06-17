@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/Azure-Samples/Azure-Python-Standardization-Template-Generator",
-  "commit": "984454a27bd81d8d26794bd3464e9b1b5714ff66",
+  "commit": "a1af8a751ff6dda112837d885ccee36578b33a2f",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -11,7 +11,7 @@
       "project_host": "aca",
       "web_port": "8000",
       "__repo_name": "azure-fastapi-postgres-flexible-aca",
-      "__src_folder_name": "azure-fastapi-postgres-flexible-aca",
+      "__src_folder_name": "azure_fastapi_postgres_flexible_aca",
       "__project_short_description": "Create a relecloud demo application with fastapi and postgres-flexible",
       "_copy_without_render": [
         ".github/workflows/azure-dev.yml",
