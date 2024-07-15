@@ -5,12 +5,10 @@ languages:
 - python
 - bicep
 - html
-- css
-- scss
 products:
 - azure
 - azure-container-apps
-- azure-postgresql
+- azure-database-postgresql
 urlFragment: azure-fastapi-postgres-flexible-aca
 name: Deploy FastAPI Application with PostgreSQL on Azure Container Apps (Python)
 description: This project deploys a web application for a space travel agency using FastAPI with Python, and is set up for easy deployment with the Azure Developer CLI.
