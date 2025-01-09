@@ -1,8 +1,9 @@
 import os
 import pathlib
+from typing import Annotated
 
 from azure.monitor.opentelemetry import configure_azure_monitor
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -59,14 +60,23 @@ def cruise_detail(request: Request, pk: int):
 
 @app.get("/info_request/", response_class=HTMLResponse)
 def info_request(request: Request):
-    return templates.TemplateResponse("info_request_create.html", {"request": request})
+    with Session(engine) as session:
+        all_cruises = session.exec(select(Cruise)).all()
+        return templates.TemplateResponse("info_request_create.html", {"request": request, "cruises": all_cruises})
 
 
 @app.post("/info_request/", response_model=InfoRequest)
-def create_info_request(info_request: InfoRequest):
+def create_info_request(request: Request, info_request: Annotated[InfoRequest, Form()]):
     with Session(engine) as session:
-        db_info_request = InfoRequest.from_orm(info_request)
-        session.add(db_info_request)
+        session.add(info_request)
         session.commit()
-        session.refresh(db_info_request)
-        return db_info_request
+        session.refresh(info_request)
+        all_cruises = session.exec(select(Cruise)).all()
+        return templates.TemplateResponse(
+            "info_request_create.html",
+            {
+                "request": request,
+                "cruises": all_cruises,
+                "message": "Information request submitted.",
+            },
+        )
